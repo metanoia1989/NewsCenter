@@ -4,10 +4,11 @@ __author__ = 'yinzishao'
 
 import time
 import datetime
-from settings import *
+from thepaper.settings import *
 
 
-with open("keywords.txt") as f : keywords  = [ line.strip().split(" ")[0].decode("utf-8") for line in f.readlines()]
+with open("keywords.txt", encoding="utf-8") as f: 
+    keywords  = [ line.strip().split(" ")[0].decode("utf-8") for line in f.readlines()]
 f.close()
 """
     判断传入的时间是否是当天

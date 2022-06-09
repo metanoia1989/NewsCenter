@@ -9,7 +9,7 @@ from thepaper.items import NewsItem
 import json
 logger = logging.getLogger("TechIfengSpider")
 from thepaper.settings import *
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 import time
 
 class TechIfeng(scrapy.spiders.Spider):

@@ -9,7 +9,7 @@ from thepaper.items import NewsItem
 import json
 logger = logging.getLogger("NbdSpider")
 from thepaper.settings import *
-from thepaper.util import judge_news_crawl,judge_key_words
+from thepaper.utils.util import judge_news_crawl,judge_key_words
 import time
 
 class TechQQSpider(scrapy.spiders.Spider):

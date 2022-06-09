@@ -10,7 +10,7 @@ import json
 import time
 logger = logging.getLogger("NbdSpider")
 from thepaper.settings import *
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 
 class _36krSpider(scrapy.spiders.Spider):
     domain = "http://36kr.com"
@@ -87,7 +87,7 @@ class _36krSpider(scrapy.spiders.Spider):
         item = response.meta.get("item", NewsItem())
         temp = re.search("\"content\":\"([\w\W]+?)\"", response.body).group(1)
         comment_num = re.search('"comment":"([\w\W]+?)"',response.body).group(1)
-        print comment_num
+        print(comment_num)
         soup = BeautifulSoup(temp)
         content = "\n\n".join([ t.text.strip() for t in soup.find_all("p")])
         item['content'] = content

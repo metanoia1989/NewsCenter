@@ -84,7 +84,7 @@ class TravelWeeklyChinaSpider(scrapy.spiders.Spider):
             #http://travelweekly-china.com/31781  只有一页！
             flag_id = response.url.split("/")[-1]
             self.flag[str(flag_id)]=1
-            print flag_id,"stop ~~~~~~"
+            print(flag_id,"stop ~~~~~~")
             logger.warning("can't find next page")
     #新闻列表
     def parse_newslist_json(self,response):

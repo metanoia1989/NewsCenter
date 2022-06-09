@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import datetime
 from scrapy.exceptions import CloseSpider
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 
 __author__ = 'yinzishao'
 

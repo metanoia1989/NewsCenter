@@ -9,7 +9,7 @@ from thepaper.items import NewsItem
 import json
 logger = logging.getLogger("WshangSpider")
 from thepaper.settings import *
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 import datetime
 class BaiduNewsSpider(scrapy.spiders.Spider):
     domain = "http://news.baidu.com/"
@@ -18,7 +18,7 @@ class BaiduNewsSpider(scrapy.spiders.Spider):
 
     def start_requests(self):
         url = self.url_demo % (0,"在线旅游")
-        print url
+        print(url)
         yield scrapy.Request(url, callback=self.parse, meta= {'keyword': '在线旅游'})
 
     def parse(self, response):
@@ -34,11 +34,11 @@ class BaiduNewsSpider(scrapy.spiders.Spider):
             #TODO: Some error
             now = datetime.datetime.now()
             if u"分钟前" in news_time:
-                print news_time[:-3]
+                print(news_time[:-3])
                 struct_date = now - datetime.timedelta(minutes=int(news_time[:-3]))
                 news_date = struct_date.strftime("%Y-%m-%d %H:%M:%S")
             elif u"小时前" in news_time:
-                print news_time[:-3]
+                print(news_time[:-3])
                 struct_date = now - datetime.timedelta(hours=int(news_time[:-3]))
                 news_date = struct_date.strftime("%Y-%m-%d %H:%M:%S")
             else:

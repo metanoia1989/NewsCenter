@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 
 __author__ = 'yinzishao'
 import re

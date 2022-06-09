@@ -8,7 +8,7 @@ from thepaper.items import NewsItem
 import json
 logger = logging.getLogger("CaacnewsSpider")
 from thepaper.settings import *
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 
 class CaacnewsSpider(scrapy.spiders.Spider):
     domain = "http://www.caacnews.com.cn"

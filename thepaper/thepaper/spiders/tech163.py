@@ -8,7 +8,7 @@ from thepaper.items import NewsItem
 import json
 logger = logging.getLogger("NbdSpider")
 from thepaper.settings import *
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 class Tech163Spider(scrapy.spiders.Spider):
     domain = "http://tech.163.com"
     name = "tech163"

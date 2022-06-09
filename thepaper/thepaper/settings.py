@@ -184,7 +184,8 @@ SPIDER_NAME = {
     "meadin": "迈点网",
     "ctcnn": "劲旅网",
     "wechat": "微信公众号",
-    "baidunews": "百度新闻"
+    "baidunews": "百度新闻",
+    "tieba": "百度贴吧"
 }
 
 WECHAT_IDS = [

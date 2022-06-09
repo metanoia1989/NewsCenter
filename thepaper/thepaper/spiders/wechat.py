@@ -13,7 +13,7 @@ import json
 import time
 logger = logging.getLogger("wechat")
 from thepaper.settings import *
-from thepaper.util import judge_news_crawl
+from thepaper.utils.util import judge_news_crawl
 
 class WechatSpider(scrapy.spiders.Spider):
     """
@@ -24,7 +24,7 @@ class WechatSpider(scrapy.spiders.Spider):
     def start_requests(self):
         for weixin_id in WECHAT_IDS[7:8]:
             url = "http://weixin.sogou.com/weixin?type=1&query=%s&ie=utf8&_sug_=y&_sug_type_=" % weixin_id
-            print url
+            print(url)
             time.sleep(random.randint(2,5))
             yield scrapy.Request(url, self.parse, meta= {"weixin_id":weixin_id})
     #TODO:BUG
@@ -33,7 +33,7 @@ class WechatSpider(scrapy.spiders.Spider):
         soup = BeautifulSoup(response.body,"lxml")
         url = soup.find("a",uigs="main_toweixin_account_image_0").get("href")   #获得公众号的主页
         name =  soup.find("a",uigs="main_toweixin_account_name_0").text.strip()
-        print url
+        print(url)
         time.sleep(random.randint(2,5))
         yield scrapy.Request(url, callback=self.parse_index, meta={"name":name, "weixin_id": weixin_id})
 
@@ -75,7 +75,7 @@ class WechatSpider(scrapy.spiders.Spider):
             item = judge_news_crawl(item)
             if item:
                 time.sleep(random.randint(2,5))
-                print item['news_url']
+                print(item['news_url'])
                 yield scrapy.Request(item['news_url'],callback=self.parse_news, meta={"item": item})
             for c in u["app_msg_ext_info"]["multi_app_msg_item_list"]:
                 title = c["title"] #某天的文章的标题
@@ -101,7 +101,7 @@ class WechatSpider(scrapy.spiders.Spider):
                 )
                 item = judge_news_crawl(item)
                 if item:
-                    print item['news_url']
+                    print(item['news_url'])
                     time.sleep(random.randint(2,5))
                     yield scrapy.Request(item['news_url'],callback=self.parse_news, meta={"item": item})
 
