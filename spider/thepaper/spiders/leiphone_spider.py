@@ -65,7 +65,7 @@ class LeiphoneSpider(scrapy.spiders.Spider):
         item["news_date"]= news_date
         item["crawl_date"]= NOW
         item["content"] = content
-        item["catalogue"] = u"最新资讯"
+        item["catalogue"] = "最新资讯"
         item = judge_news_crawl(item)
         if item:
             yield item

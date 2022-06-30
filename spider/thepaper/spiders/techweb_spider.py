@@ -38,7 +38,7 @@ class TechwebSpider(scrapy.spiders.Spider):
             pic = news.find("img").get("src",None) if news.find("img") else None
             tags_list = news.find("span",class_="tag")("a") if news.find("span",class_="tag") else None
             tags =  [i.text for i in tags_list] if tags_list else None
-            catalogue = u"原创" if "yuanchuang" in origin_url else u"咨询"
+            catalogue = "原创" if "yuanchuang" in origin_url else "咨询"
             item = NewsItem(
                 news_url=news_url,
                 news_no=news_no,
@@ -72,7 +72,7 @@ class TechwebSpider(scrapy.spiders.Spider):
             news_date = struct_date.strftime("%Y-%m-%d %H:%M:%S")
             # u''
             comment_text = soup.find("span",id="comment_num").text if soup.find("span",id="comment_num") else None
-            if comment_text == u'':
+            if comment_text == '':
                 comment_num = 0
             else:
                 comment_num = int(comment_text)
@@ -91,7 +91,7 @@ class TechwebSpider(scrapy.spiders.Spider):
             catalogue = item["catalogue"]
             item = judge_news_crawl(item)
             if item:
-                if u"下一页" in content_txt.find("div",class_="page").text:
+                if "下一页" in content_txt.find("div",class_="page").text:
                 #替换成下一页 格式：http://www.techweb.com.cn/world/2016-07-26/2365804_2.shtml
 
 
@@ -109,7 +109,7 @@ class TechwebSpider(scrapy.spiders.Spider):
         else:
             content_txt = soup.find("div",class_="content_txt")
             content = content_txt.get_text(strip=True)
-            item["content"] += u"\n第%s页\n%s" % (news_index,content)
+            item["content"] += "\n第%s页\n%s" % (news_index,content)
             if item:
                 #下一页是disabled说明没有下一页
                 if not content_txt.find("div",class_="page").find("span",class_="disabled"):

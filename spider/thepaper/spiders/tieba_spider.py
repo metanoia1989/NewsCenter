@@ -17,12 +17,18 @@ from thepaper.utils import helper
 class TiebaSpider(scrapy.Spider):
     name = "tieba"
     cur_page = 1    #modified by pipelines (open_spider)
-    end_page = 9999
+    end_page = 50 
     filter = None
     see_lz = False
+    tbname = '龙华'
+
+    page_url = f"https://tieba.baidu.com/f?kw={tbname}&pn=%s"
+    start_urls =[
+        page_url % (cur_page - 1)*50
+    ]
     
     def parse(self, response): #forum parser
-        print("Crawling page %d..." % self.cur_page)
+        print(("Crawling page %d..." % self.cur_page))
         for sel in response.xpath('//li[contains(@class, "j_thread_list")]'):
             data = json.loads(sel.xpath('@data-field').extract_first())
             if data['id'] == 1: # 去掉"本吧吧主火热招募"
@@ -68,7 +74,7 @@ class TiebaSpider(scrapy.Spider):
                 item['thread_id'] = meta['thread_id']
                 item['floor'] = data['content']['post_no']
                 #只有以前的帖子, data-field里面才有date
-                if 'date' in data['content'].keys():
+                if 'date' in list(data['content'].keys()):
                     item['news_date'] = data['content']['date']
                     #只有以前的帖子, data-field里面才有date
                 else:
@@ -78,7 +84,7 @@ class TiebaSpider(scrapy.Spider):
                 yield item
                 break
 
-        next_page = response.xpath(u".//ul[@class='l_posts_num']//a[text()='下一页']/@href")
+        next_page = response.xpath(".//ul[@class='l_posts_num']//a[text()='下一页']/@href")
         if next_page:
             meta['page'] += 1
             url = response.urljoin(next_page.extract_first())

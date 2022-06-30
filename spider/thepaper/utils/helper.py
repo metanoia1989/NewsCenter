@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import re
-from six.moves.urllib import request
 from bs4 import BeautifulSoup
 from . import emotion
 from os.path import dirname, abspath
 import time
+from urllib import request
 
 
 def is_ad(s): #判断楼层是否为广告
-    ad = s.xpath(u".//span[contains(text(), '广告')]")
+    ad = s.xpath(".//span[contains(text(), '广告')]")
     # 广告楼层中间有个span含有广告俩字
     return ad
 

@@ -120,7 +120,7 @@ class JiemianSpider(scrapy.spiders.Spider):
                                 read_num = read_num,
                                 comment_num = comment_num,
                                 )
-                if u"昨天" in news.find("span",class_ = "date").text.strip():
+                if "昨天" in news.find("span",class_ = "date").text.strip():
                     self.flag = pageindex
                 yield scrapy.Request(item["news_url"],callback=self.parse_news,meta={"item":item})
                 if not self.flag:
@@ -130,7 +130,7 @@ class JiemianSpider(scrapy.spiders.Spider):
     def parse_news(self,response):
         item = response.meta.get("item",NewsItem())
         soup = BeautifulSoup(response.body)
-        read_num = soup.find("a",title=u"浏览").text.strip() if soup.find("a",title=u"浏览") else None
+        read_num = soup.find("a",title="浏览").text.strip() if soup.find("a",title="浏览") else None
         comment_num  = soup.find("span", class_="comment_count").text.strip() if soup.find("span", class_="comment_count") else None
         author = soup.find("span",class_="author").text.strip() if soup.find("span",class_="author") else None
         news_date = soup.find("span", class_="date").text.strip().replace("/","-") + ":00"  if soup.find("span", class_="date") else None

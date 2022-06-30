@@ -46,7 +46,7 @@ class NbdSpider(scrapy.spiders.Spider):
         menu = soup.find_all("a",class_="ui-more")  #所有的类别的链接
         if menu:
             for topic in menu:
-                topic_name = topic.text.replace(u"查看","")
+                topic_name = topic.text.replace("查看","")
                 topic_url = topic.get("href")
                 self.flag.setdefault(topic_url,0)
                 page="1"
@@ -128,7 +128,7 @@ class NbdSpider(scrapy.spiders.Spider):
         article_head = soup.find("div",class_="article-head")
         author=None
         if article_head:
-            author = article_head.p.text.split(u"／")[1]
+            author = article_head.p.text.split("／")[1]
 
         article_tag_list = soup.find("div",class_="article-tag")("a") if soup.find("div",class_="article-tag") else []
         tags = [tag.text for tag in article_tag_list]
@@ -136,5 +136,5 @@ class NbdSpider(scrapy.spiders.Spider):
         item["author"] = author
         item["content"] = content
         item["crawl_date"] = NOW
-        item["catalogue"] = u"最新内容"
+        item["catalogue"] = "最新内容"
         yield item

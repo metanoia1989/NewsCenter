@@ -28,17 +28,17 @@ class BaiduNewsSpider(scrapy.spiders.Spider):
             item = NewsItem()
             url = t.find("a").get("href")       #新闻url
             title = t.find("a").text            #新闻标题
-            temp_list = t.find("div",attrs={"class":"c-title-author"}).text.split(u"\xa0\xa0")
+            temp_list = t.find("div",attrs={"class":"c-title-author"}).text.split("\xa0\xa0")
             website_name = temp_list[0]         #新闻网站名称、
             news_time = temp_list[1]
             #TODO: Some error
             now = datetime.datetime.now()
-            if u"分钟前" in news_time:
-                print(news_time[:-3])
+            if "分钟前" in news_time:
+                print((news_time[:-3]))
                 struct_date = now - datetime.timedelta(minutes=int(news_time[:-3]))
                 news_date = struct_date.strftime("%Y-%m-%d %H:%M:%S")
-            elif u"小时前" in news_time:
-                print(news_time[:-3])
+            elif "小时前" in news_time:
+                print((news_time[:-3]))
                 struct_date = now - datetime.timedelta(hours=int(news_time[:-3]))
                 news_date = struct_date.strftime("%Y-%m-%d %H:%M:%S")
             else:

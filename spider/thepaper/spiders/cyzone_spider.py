@@ -68,7 +68,7 @@ class CyzoneSpider(scrapy.spiders.Spider):
                             author=author,
                             news_no=news_no,
                             news_date=news_date,
-                            catalogue=u"中间推荐模板")
+                            catalogue="中间推荐模板")
             item = judge_news_crawl(item)
             if item:
                 request = scrapy.Request(news_url,meta={"item":item},callback=self.parse_news)
@@ -116,7 +116,7 @@ class CyzoneSpider(scrapy.spiders.Spider):
                             title=title,
                             news_no=news_no,
                             news_date=news_date,
-                            catalogue=u"快报")
+                            catalogue="快报")
             item = judge_news_crawl(item)
             if item:
                 request = scrapy.Request(news_url,meta={"item":item},callback=self.parse_quick_news)

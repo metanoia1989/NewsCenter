@@ -69,5 +69,5 @@ class Wallstreetcn(scrapy.spiders.Spider):
         soup = BeautifulSoup(response.body,"lxml")
         content = soup.find("div",class_="page-article-content").text.strip() if soup.find("div",class_="page-article-content") else None
         item["content"]=content
-        item["catalogue"] = u"最新文章"
+        item["catalogue"] = "最新文章"
         yield item

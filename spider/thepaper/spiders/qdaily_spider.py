@@ -37,7 +37,7 @@ class QdailySpider(scrapy.spiders.Spider):
             if newslist:
                 for i in newslist.children:
                     #文章中间有其余无关信息
-                    if i != u' ':
+                    if i != ' ':
                         news_url = self.domain+i.a.get('href',None)
                         pic = i.find("img").get('data-src') if i.find("img") else None
                         title = i.find("h3").string if i.find("h3") else None
@@ -53,7 +53,7 @@ class QdailySpider(scrapy.spiders.Spider):
                         #no content and have heart&conment but not add
                         item = NewsItem(title=title,news_url=news_url,pic=pic,topic=topic,news_date=news_date,comment_num=comment_num)
                         # 所属目录
-                        item['catalogue'] = "Top 15" if "tags" in response.url else u"商业"
+                        item['catalogue'] = "Top 15" if "tags" in response.url else "商业"
                         #判断是否结束
                         item = judge_news_crawl(item)
                         if item :
@@ -102,7 +102,7 @@ class QdailySpider(scrapy.spiders.Spider):
                 if id and datatype:
                     news_url = self.domain+"%s/%s" % (datatype+"s",id)
                     item = NewsItem(title=title,news_url=news_url,pic=pic,topic=topic,news_date=news_date,comment_num=comment_num)
-                    item['catalogue'] = "Top 15" if "tags" in response.url else u"商业"
+                    item['catalogue'] = "Top 15" if "tags" in response.url else "商业"
                     item = judge_news_crawl(item)
                     if item :
                         request = scrapy.Request(news_url,callback=self.parse_article)

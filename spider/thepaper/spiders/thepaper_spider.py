@@ -41,7 +41,7 @@ class ThepaperSpider(scrapy.spiders.Spider):
         #爬取下一页的链接
         lasttime = "nothing"
         for i in  soup.select('div[class="news_li"]'):
-            if i.attrs.has_key("lasttime"):
+            if "lasttime" in i.attrs:
                 lasttime =  i["lasttime"]
                 break
         #得到下一个url的连接。

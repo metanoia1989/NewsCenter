@@ -15,7 +15,7 @@ __author__ = 'yinzishao'
 import logging
 import random
 from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
-from settings import PROXIES,USER_AGENT_LIST
+from .settings import PROXIES,USER_AGENT_LIST
 class RotateUserAgentMiddleware(UserAgentMiddleware):
 
     def __init__(self, user_agent=''):
@@ -44,7 +44,7 @@ class ProxyMiddleware(object):
             request.meta['proxy'] = "http://%s" % proxy['ip_port']
             encoded_user_pass = base64.encodestring(proxy['user_pass'])
             request.headers['Proxy-Authorization'] = 'Basic ' + encoded_user_pass
-            print "**************ProxyMiddleware have pass************" + proxy['ip_port']
+            print("**************ProxyMiddleware have pass************" + proxy['ip_port'])
         else:
-            print "**************ProxyMiddleware no pass************" + proxy['ip_port']
+            print("**************ProxyMiddleware no pass************" + proxy['ip_port'])
             request.meta['proxy'] = "http://%s" % proxy['ip_port']

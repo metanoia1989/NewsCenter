@@ -9,7 +9,7 @@
 import json
 import pymongo
 import logging
-from settings import SPIDER_NAME
+from .settings import SPIDER_NAME
 from util import judge_key_words
 from scrapy.exceptions import DropItem
 from bson.objectid import ObjectId

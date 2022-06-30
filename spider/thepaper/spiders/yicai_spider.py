@@ -31,7 +31,7 @@ class YicaiSpider(scrapy.spiders.Spider):
         self.driver = webdriver.Firefox(executable_path=chromedriver)
     def parse(self, response):
         topic_url = response.url
-        catalogue = u"商业" if "business" in topic_url else u"消费"
+        catalogue = "商业" if "business" in topic_url else "消费"
         self.driver.get(topic_url)                      #打开页面
         index_page_code = self.driver.page_source       #页面源代码
         code =index_page_code

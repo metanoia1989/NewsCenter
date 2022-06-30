@@ -31,7 +31,7 @@ class ToptourSpider(scrapy.spiders.Spider):
                 item = NewsItem(
                     news_url = news_url,
                     title = title,
-                    catalogue = u"右推荐"
+                    catalogue = "右推荐"
                 )
                 yield scrapy.Request(item["news_url"],callback=self.parse_news,meta={'item':item})
         else:

@@ -57,7 +57,7 @@ class TechQQSpider(scrapy.spiders.Spider):
         today_text_url = None
         if temp:
             for t in temp:
-                if u"下一页" in t:
+                if "下一页" in t:
                     today_text_url = t.get("href")
         if today_text_url:
             yield scrapy.Request(today_text_url)

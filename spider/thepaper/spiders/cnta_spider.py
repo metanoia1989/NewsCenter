@@ -85,7 +85,7 @@ class CntaSpider(scrapy.spiders.Spider):
         soup = BeautifulSoup(response.body,"lxml")
         temp = soup.find("div",class_ = "main_t").find_all("span")
         news_date = temp[0].text
-        referer_web = temp[1].text.split(u"：")[1]
+        referer_web = temp[1].text.split("：")[1]
         temp = soup.find("div",class_ = "TRS_Editor")
         content  = "\n\n".join([ t.text.strip() for t in temp.find_all("p")])
         item["news_date"] = news_date

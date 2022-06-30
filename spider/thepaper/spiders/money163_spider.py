@@ -62,8 +62,8 @@ class Money163Spider(scrapy.spiders.Spider):
         referer_web = soup.find('a',id = 'ne_article_source').text if soup.find('a',id = 'ne_article_source') else None
         referer_url = soup.find('a',id = 'ne_article_source').get('href') if soup.find('a',id = 'ne_article_source') else None
         author = soup.find('span',class_ = 'ep-editor').text if soup.find('span',class_ = 'ep-editor') else None
-        if u"：" in author:
-            author = author.split(u"：")[-1]
+        if "：" in author:
+            author = author.split("：")[-1]
         crawl_date = NOW
         read_num = soup.find('div',class_ = 'post_comment_joincount').find('a').text if soup.find('div',class_ = 'post_comment_tiecount') else 0
         comment_num = soup.find('div',class_ = 'post_comment_tiecount').find('a').text if soup.find('div',class_ = 'post_comment_tiecount') else 0

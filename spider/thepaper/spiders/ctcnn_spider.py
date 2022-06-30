@@ -41,7 +41,7 @@ class CtcnnSpider(scrapy.spiders.Spider):
             title = news.h2.a.string if news.h2.a else None
             abstract = news.p.string if news.p else None
             news_url = self.domain+news.a.get("href",None) if news.a else None
-            item = NewsItem(title=title,abstract=abstract,news_url=news_url,catalogue=u"原创内容")
+            item = NewsItem(title=title,abstract=abstract,news_url=news_url,catalogue="原创内容")
             request = scrapy.Request(news_url,self.parse_news,dont_filter=True)
             request.meta["item"] = item
             yield request
@@ -61,7 +61,7 @@ class CtcnnSpider(scrapy.spiders.Spider):
                 abstract = news.find(class_="info").string if news.find(class_="info") else None
                 pic = self.domain+news.find('img').get('src',None) if news.find('img') else None
                 topic = news.find(class_="type").string if news.find(class_="type") else None
-                item = NewsItem(catalogue=u"最新内容",
+                item = NewsItem(catalogue="最新内容",
                                 title=title,
                                 news_url=news_url,
                                 abstract=abstract,

@@ -12,7 +12,7 @@ from util import judge_news_crawl,judge_key_words
 from bson.objectid import ObjectId
 from pyvirtualdisplay import Display
 from selenium import webdriver
-from settings import MONGO_URI,MONGO_DATABASE,WECHAT_IDS
+from .settings import MONGO_URI,MONGO_DATABASE,WECHAT_IDS
 from bs4 import BeautifulSoup
 # display = Display(visible=0, size=(800, 600))
 # display.start()
@@ -39,7 +39,7 @@ def get_article_list(home_url,weixin_id,weixin_name):
     :param url: 公众号主页
     :return:
     '''
-    print home_url
+    print(home_url)
     # driver = webdriver.Chrome(chromedriver)
     # driver.get(home_url)
     script_url = "window.open('" + home_url +"', 'new_window')"
@@ -113,7 +113,7 @@ def article_content(article_list):
     result = []
     for c in article_list:
         # driver = webdriver.Chrome(chromedriver)
-        print c["news_url"]
+        print(c["news_url"])
         script_url = "window.open('" + c["news_url"] +"', 'new_window')"
         # print script_url
         # driver.get(c["news_url"])
@@ -128,11 +128,11 @@ def article_content(article_list):
         item_keywords = judge_key_words(c)
         if item_keywords:   #筛选出有关键词的item
             c["keywords"] = item_keywords
-            print "存在关键词"
+            print("存在关键词")
             result.append(c)
         else:
-            print c["news_url"]
-            print "不存在关键词"
+            print(c["news_url"])
+            print("不存在关键词")
     return result
 
 def insertMongoDB(items):
@@ -155,14 +155,14 @@ if __name__ == "__main__":
             d["index"]=0
     with open('wechat.json', 'w') as f :
         f.write(json.dumps(d))
-    print "crawl the index of wechat:"
-    print index
+    print("crawl the index of wechat:")
+    print(index)
     s = requests.Session()
     weixin_id = WECHAT_IDS[index]
     home_url,weixin_name = search_public(weixin_id)
     article_list = get_article_list(home_url,weixin_id,weixin_name)
     # print article_list
-    print len(article_list)
+    print(len(article_list))
     result = article_content(article_list)
     # print result
     insertMongoDB(result)

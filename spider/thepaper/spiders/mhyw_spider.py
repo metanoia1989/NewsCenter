@@ -66,7 +66,7 @@ class MhywSpider(scrapy.spiders.Spider):
                 pic = url_head + soup.find('p',align="center").find('img').get('src')[1:]
             else:
                 pic = None
-            referer_web = soup.find('span',class_ = 'p_r20').text.strip().split(u'：')[0]
+            referer_web = soup.find('span',class_ = 'p_r20').text.strip().split('：')[0]
             if soup.find('p',align="left"):
                 abstract = soup.find('p',align="left").get_text(strip = True)
             else:

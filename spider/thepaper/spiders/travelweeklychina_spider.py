@@ -84,7 +84,7 @@ class TravelWeeklyChinaSpider(scrapy.spiders.Spider):
             #http://travelweekly-china.com/31781  只有一页！
             flag_id = response.url.split("/")[-1]
             self.flag[str(flag_id)]=1
-            print(flag_id,"stop ~~~~~~")
+            print((flag_id,"stop ~~~~~~"))
             logger.warning("can't find next page")
     #新闻列表
     def parse_newslist_json(self,response):
@@ -113,7 +113,7 @@ class TravelWeeklyChinaSpider(scrapy.spiders.Spider):
                 #可以获取到p的内容
                 #news.p ->  \u7cfb\u5217\u6d3b\u52a8\u3002...\xa0
                 #TODO:没有replace(u'\xa0'),仍然不知出现编码问题的原因，暂不处理
-                abstract = news.p.strings.next()
+                abstract = next(news.p.strings)
 
                 if url:
                     #列表并没有时间，所以不能设定停止条件

@@ -75,7 +75,7 @@ class WechatSpider(scrapy.spiders.Spider):
             item = judge_news_crawl(item)
             if item:
                 time.sleep(random.randint(2,5))
-                print(item['news_url'])
+                print((item['news_url']))
                 yield scrapy.Request(item['news_url'],callback=self.parse_news, meta={"item": item})
             for c in u["app_msg_ext_info"]["multi_app_msg_item_list"]:
                 title = c["title"] #某天的文章的标题
@@ -101,7 +101,7 @@ class WechatSpider(scrapy.spiders.Spider):
                 )
                 item = judge_news_crawl(item)
                 if item:
-                    print(item['news_url'])
+                    print((item['news_url']))
                     time.sleep(random.randint(2,5))
                     yield scrapy.Request(item['news_url'],callback=self.parse_news, meta={"item": item})
 

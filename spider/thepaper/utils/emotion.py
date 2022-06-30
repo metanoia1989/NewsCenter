@@ -1,9 +1,9 @@
 import re
 import json
 from io import open
-from thepaper.utils.helper import getFileDir
+from os.path import dirname, abspath
 
-emotion_data = json.loads(open(getFileDir(__file__) + '/emotion.json','r',encoding='utf8').read())
+emotion_data = json.loads(open(dirname(abspath(__file__)) + '/emotion.json','r',encoding='utf8').read())
 
 def get_text(url):
     for data in emotion_data:
