@@ -26,6 +26,7 @@ class NewsItem(scrapy.Item):
     referer_web = scrapy.Field()#引用的网站名
     referer_url = scrapy.Field()#引用的源url
     author = scrapy.Field()     #作者
+    avatar = scrapy.Field()     #头像 
     read_num = scrapy.Field()   #已阅读量
     comment_num =scrapy.Field() #已评论量
     pic = scrapy.Field()        #新闻图片
