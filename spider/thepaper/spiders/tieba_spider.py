@@ -24,11 +24,15 @@ class TiebaSpider(scrapy.Spider):
 
     page_url = f"https://tieba.baidu.com/f?kw={tbname}&pn=%s"
     start_urls =[
-        page_url % (cur_page - 1)*50
+        page_url % ((cur_page - 1)*50)
     ]
     
     def parse(self, response): #forum parser
         print(("Crawling page %d..." % self.cur_page))
+        res = response.replace(body='hello')
+        print("第一页", self.start_urls[0], res.body)
+
+
         for sel in response.xpath('//li[contains(@class, "j_thread_list")]'):
             data = json.loads(sel.xpath('@data-field').extract_first())
             if data['id'] == 1: # 去掉"本吧吧主火热招募"
