@@ -7,12 +7,16 @@
 写一个通用的贴吧爬虫，不同的吧传入吧名即可    
 """
 
+from base64 import encode
+from copyreg import constructor
+from requests import request
 import scrapy
 import json
 import time
 from math import ceil
 from thepaper.items import NewsItem
 from thepaper.utils import helper
+from urllib.parse import quote
 
 class TiebaSpider(scrapy.Spider):
     name = "tieba"
@@ -22,19 +26,20 @@ class TiebaSpider(scrapy.Spider):
     see_lz = False
     tbname = '龙华'
 
-    page_url = f"https://tieba.baidu.com/f?kw={tbname}&pn=%s"
+    # 吧名必须编码，不然就拿不到内容，满离谱的哈哈 
+    page_url = "https://tieba.baidu.com/f?kw=" + quote(tbname) + "&pn={pn}"
     start_urls =[
-        page_url % ((cur_page - 1)*50)
+        page_url.format(pn = (cur_page - 1)*50)
     ]
-    
+
+
     def parse(self, response): #forum parser
         print(("Crawling page %d..." % self.cur_page))
-        res = response.replace(body='hello')
-        print("第一页", self.start_urls[0], res.body)
-
+        print("请求地址啊", response.url, response.meta)
 
         for sel in response.xpath('//li[contains(@class, "j_thread_list")]'):
-            data = json.loads(sel.xpath('@data-field').extract_first())
+            data = json.loads(sel.xpath('@data-field').get())
+            print('数据啊', data)
             if data['id'] == 1: # 去掉"本吧吧主火热招募"
                 continue
             item = {}

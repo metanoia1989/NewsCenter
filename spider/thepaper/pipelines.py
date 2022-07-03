@@ -68,6 +68,7 @@ class MongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
+        print("#有处理吗？？？#", item)
         item['source'] = SPIDER_NAME[spider.name]
         item['_id'] = str(ObjectId())
         collection_name = "wechat" if spider.name == "wechat" else self.collection_name

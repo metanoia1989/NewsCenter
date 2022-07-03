@@ -54,7 +54,7 @@ NEWSPIDER_MODULE = 'thepaper.spiders'
 #}
 DOWNLOADER_MIDDLEWARES = {
         'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware' : None,
-        'thepaper.rotate_useragent.ProxyMiddleware' : None, #代理
+        'thepaper.rotate_useragent.ProxyMiddleware' : 100, #代理
         'thepaper.rotate_useragent.RotateUserAgentMiddleware' :400, #User_agent
     }
 # Enable or disable extensions

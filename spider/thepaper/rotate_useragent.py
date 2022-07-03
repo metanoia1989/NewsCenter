@@ -2,6 +2,8 @@
 # -*- coding:utf-8 -*-
 import base64
 
+import requests
+
 __author__ = 'yinzishao'
 # -*-coding:utf-8-*-
 
@@ -39,7 +41,14 @@ class RotateUserAgentMiddleware(UserAgentMiddleware):
 
 class ProxyMiddleware(object):
     def process_request(self, request, spider):
-        proxy = random.choice(PROXIES)
+        # 使用固定配置的ip代理
+        # proxy = random.choice(PROXIES)
+        # 使用ip池中的代理
+        res = requests.get('http://127.0.0.1:5010/get/').json()
+        proxy = {
+            "user_pass": None,
+            "ip_port": res.get('proxy')
+        } 
         if proxy['user_pass'] is not None:
             request.meta['proxy'] = "http://%s" % proxy['ip_port']
             encoded_user_pass = base64.encodestring(proxy['user_pass'])
